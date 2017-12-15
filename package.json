@@ -1,0 +1,27 @@
+{
+  "name": "secure-read-key",
+  "version": "0.0.0",
+  "description": "Read a key safely into a secure, read-only Buffer",
+  "main": "index.js",
+  "dependencies": {
+    "nanoassert": "^1.1.0",
+    "sodium-native": "^2.0.1"
+  },
+  "devDependencies": {
+    "tape": "^4.8.0"
+  },
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilbayes/secure-read-key.git"
+  },
+  "keywords": [],
+  "author": "Emil Bay <github@tixz.dk>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilbayes/secure-read-key/issues"
+  },
+  "homepage": "https://github.com/emilbayes/secure-read-key#readme"
+}
