@@ -1,5 +1,7 @@
 # `secure-read-key`
 
+[![Build Status](https://travis-ci.org/emilbayes/secure-read-key.svg?branch=master)](https://travis-ci.org/emilbayes/secure-read-key)
+
 > Read a key safely into a secure, read-only Buffer
 
 ## Usage
