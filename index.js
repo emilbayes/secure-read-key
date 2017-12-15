@@ -23,7 +23,14 @@ module.exports = function (bytes, path, cb) {
       // Destroy key again as we may have read bytes into it
       if (destroyed === true) destroyKey()
 
-      return cb(null, output)
+      fs.close(fd, function (err) {
+        if (err) {
+          destroyKey()
+          return cb(err)
+        }
+
+        return cb(null, output)
+      })
     })
   })
 
