@@ -4,6 +4,8 @@
 
 > Read a key safely into a secure, read-only Buffer
 
+A piece in the puzzle towards [`secure-key-management`](https://github.com/emilbayes/secure-key-management)
+
 ## Usage
 
 ```js
