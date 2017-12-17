@@ -44,11 +44,9 @@ Causes of error can be:
 * The number of bytes read did not match the expected number of bytes
 
 Note that the `secureKeyBuf` looks like a normal `Buffer`, but has some extra
-properties. It will be wiped clean in case of a core dump, it will always stay
-in volatile memory (no swap), it will crash the process if anyone tries to
-write to it and it will also be overwritten when garbage collected. Also be wary
-about using any of the default Buffer operations on this secure Buffer.
-[Further documentation on memory protection in `sodium-native`](https://github.com/sodium-friends/sodium-native#memory-protection)
+properties. You can read more about
+[Secure Buffers on `secure-key-management`](https://github.com/emilbayes/secure-key-management#secure-buffers)
+Be wary about using any of the default Buffer operations on this Secure Buffer.
 
 To explicitly release the key and it's content, call the returned `destroy`
 method, which will safely wipe the key from memory and mark it for no access,
