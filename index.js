@@ -1,4 +1,5 @@
 var fs = require('fs')
+var destroyKey = require('secure-destroy-key')
 var sodium = require('sodium-native')
 var assert = require('nanoassert')
 
@@ -9,37 +10,35 @@ module.exports = function (bytes, path, cb) {
   assert(typeof cb === 'function', 'cb must be function')
 
   var destroyed = false
-  var output = sodium.sodium_malloc(bytes)
+  var key = sodium.sodium_malloc(bytes)
 
   fs.open(path, 'r', function (err, fd) {
     if (err) return cb(err)
 
-    if (destroyed === true) return cb(null, output)
-    fs.read(fd, output, 0, output.length, 0, function (err, bytesRead, buffer) {
+    if (destroyed === true) return cb(null, key)
+    fs.read(fd, key, 0, key.length, 0, function (err, bytesRead, buffer) {
       if (err) return cb(err)
       if (bytesRead !== bytes) return cb(new Error(`Did not read the expected number of bytes. Read ${bytesRead}, expected ${bytes}`))
-      sodium.sodium_mprotect_readonly(output)
+      sodium.sodium_mprotect_readonly(key)
 
       // Destroy key again as we may have read bytes into it
-      if (destroyed === true) destroyKey()
+      if (destroyed === true) destroy()
 
       fs.close(fd, function (err) {
         if (err) {
-          destroyKey()
+          destroy()
           return cb(err)
         }
 
-        return cb(null, output)
+        return cb(null, key)
       })
     })
   })
 
-  function destroyKey () {
-    destroyed = true
-    sodium.sodium_mprotect_readwrite(output)
-    sodium.sodium_memzero(output)
-    sodium.sodium_mprotect_noaccess(output)
-  }
+  return destroy
 
-  return destroyKey
+  function destroy () {
+    destroyed = true
+    destroyKey(key)
+  }
 }
