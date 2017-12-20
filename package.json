@@ -1,6 +1,6 @@
 {
   "name": "secure-read-key",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Read a key safely into a secure, read-only Buffer",
   "main": "index.js",
   "dependencies": {
