@@ -6,7 +6,7 @@
   "dependencies": {
     "secure-destroy-key": "^1.0.0",
     "nanoassert": "^1.1.0",
-    "sodium-native": "^2.4.0"
+    "sodium-native": "^2.1.2"
   },
   "devDependencies": {
     "tape": "^4.8.0"
